@@ -5,7 +5,7 @@ public class Test {
 <<<<<<< HEAD
 	 * 测试测试abcdefg
 =======
-	 * 测试测试123456
+	 * 测试测试123456abcdrfg
 >>>>>>> branch 'master' of https://github.com/niexiaozhi/test_springBoot.git
 	 * @param args
 	 */
