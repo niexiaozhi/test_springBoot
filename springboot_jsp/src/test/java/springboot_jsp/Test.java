@@ -3,7 +3,7 @@ package springboot_jsp;
 public class Test {
 	/**
 <<<<<<< HEAD
-	 * 测试测试abcdefg
+	 * 测试测试abcdefg123456
 =======
 	 * 测试测试123456
 >>>>>>> branch 'master' of https://github.com/niexiaozhi/test_springBoot.git
