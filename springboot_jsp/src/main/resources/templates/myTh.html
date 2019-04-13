@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">  <!-- 第一步在html中加入 xmlns:th="http://www.thymeleaf.org-->
+  <head>
+    <title>index.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<style type="text/css">
+		table tr th{
+			border: 1px solid red; 
+		}
+		table tr td{
+			border: 1px solid red; 
+		}
+	</style>
+  </head>
+  
+  <body>
+    
+    <h5 th:text="${MSG}">
+    123456
+    </h5>
+    
+    <div>
+    	<h3 th:text="${dept.dId}"></h3>
+    	<h3 th:text="${dept.dName}"></h3>
+    </div>
+    
+    <div th:object="${dept}">
+    	<h3 th:text="*{dId}"></h3>
+    	<h3 th:text="*{dName}"></h3>
+    </div>
+    
+    <!-- 循环 -->
+    <table>
+    	<tr th:text="分页插件自带的数据总条数：+ ${deptList.total}"></tr>
+    	<tr>
+    		<th>Thymeleaf列表下标</th>
+    		<th>Thymeleaf序号</th>
+    		<th>Thymeleaf统计对象的大小</th>
+    		<th>Thymeleaf判断是否是偶数行</th>
+    		<th>Thymeleaf判断是否是奇数行</th>
+    		<th>Thymeleaf判断是否是第一个</th>
+    		<th>Thymeleaf判断是否是最后一个</th>
+    		<th>部门编号</th>
+    		<th>部门名称</th>
+    	</tr>
+    	<tr th:each="depts : ${deptList.list}">
+    		<td th:text="下标：+ ${deptsStat.index}"></td>
+    		<td th:text="序号：+ ${deptsStat.count}"></td>
+    		<td th:text="大小：+ ${deptsStat.size}"></td>
+    		<td th:text="奇数行：+ ${deptsStat.even}"></td>
+    		<td th:text="偶数行：+ ${deptsStat.odd}"></td>
+    		<td th:text="第一个：+ ${deptsStat.first}"></td>
+    		<td th:text="最后一个：+ ${deptsStat.last}"></td>
+    		<td th:text="${depts.dId}"></td>
+    		<td th:text="${depts.dName}"></td>
+    	</tr>
+    </table>
+    
+    <!-- if语句 -->
+    <span th:if="${sex == 1}">
+    	男
+    </span>
+    <span th:if="${sex == 2}">
+    	女
+    </span>
+    
+    <!-- switch case 语句 -->
+    <div th:switch="${sex}">
+    	<p th:case=1>男</p>
+    	<p th:case=2>女</p>
+    	<p th:case=0>未知</p>
+    </div>
+    
+    <input type="text" th:value="${MSG}">
+    <input type="text" th:attr="tid = ${MSG}">
+    
+    <!-- 内联文本 th:inline="text"(可不写) th:inline="none"(无效)-->
+    <div>
+    	内联文本：[[${MSG}]]
+    </div>
+    <!-- 内联脚本  th:inline="javascript"  需要在js代码中取得后台数据时使用-->
+    <script type="text/javascript" th:inline="javascript">
+    	var name = "Hello," + [[${dept.dName}]];
+    	alert(name);
+    </script>
+    
+    <!-- text内可以直接计算 -->
+    <div th:text="15+15"></div>
+    
+    <!-- 字符串拼接，可在两边用上|，就不需要用+拼接了 -->
+    <div th:text="|您好，我叫${dept.dName},性别为${sex}|"></div>
+    
+    <!-- 三元运算符 -->
+    <div th:text="${sex eq 1} ? '男' : '女'">未知</div>
+    
+    <!-- 自带的基本内置对象：request、session -->
+    <div th:text="${#request.getAttribute('name')}"></div>
+    <div th:text="${#session.getAttribute('age')}"></div>
+    
+    <!-- 内置功能对象   #开头   s结尾     类似于java的方法，有专门的API进行查询 -->
+    <div th:text="${#dates.format(date,'yyyy/mm/dd HH:mm:ss')}"></div>
+    <div th:text="${#strings.substring(str,0,5)}"></div>
+    
+  </body>
+</html>

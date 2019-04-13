@@ -1,0 +1,15 @@
+
+#自定义参数
+geRenJinaLi: 
+  name: nieXiaoZhi
+  age: 24
+  sex: 男
+  hobby: 
+    one: 篮球
+    
+#thymeleaf配置
+spring:
+  thymeleaf:
+    cache: false  ##关闭页面缓存，仅开发中使用
+    mode: LEGACYHTML5  #严格不验证H5，有些标签可不写结束标签
+    
